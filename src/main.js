@@ -16,6 +16,7 @@ import { faCopy, faEnvelope, faPaperPlane } from '@fortawesome/free-regular-svg-
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 
+
 library.add(faInfoCircle, faChevronDown, faChevronRight, faCopy,faEnvelope, faExpand, faCompress, faBook, faPaperPlane, faBookOpen)
 
 

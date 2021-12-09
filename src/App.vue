@@ -150,23 +150,24 @@ export default {
           
       },
 
-      forward(){
-        var xhr = new XMLHttpRequest();
-              xhr.open("POST", "http://localhost:7080", true);
-              xhr.setRequestHeader('Content-Type', 'application/json');
-              xhr.send(JSON.stringify({
-              userID: this.userID
-}));
-      },
+
 
       async getFreeVM(){
        
           const snapshot = await VM_db.where("userID", "==", "").limit(1).get();
-          console.log(snapshot)
+
           this.VMData=snapshot.docs.map((doc) => doc.data())
-          console.log("VM Data", this.VMData[0])
+        
           if(typeof this.VMData[0] !== "undefined"){
-          console.log(this.VMData[0].ip)
+
+                this.ip= this.VMData[0].ip
+                //const check = await VM_db.doc(this.ip).get();
+                //console.log("still empty: ", check.data().userID)
+
+                VM_db.doc(this.ip).update( {
+                userID : this.userID }
+              )
+
           userDashboard.doc(this.userID).set({
               round: 1,
               level: 0,
@@ -176,16 +177,14 @@ export default {
               userID: this.userID
               } );
               
-              VM_db.doc(this.ip).update( {
-                userID : this.userID }
-              )
+              
               this.pseudonym = this.VMData[0].pseudonym;
               //this.url="http://"+this.VMData[0].ip+":7080?userID="+this.userID; TODO:Change back
 
               
 
               this.url="http://localhost:7080?userID="+this.userID;
-              this.ip= this.VMData[0].ip
+              
               this.VMAssigned = true; }
 
               else{
