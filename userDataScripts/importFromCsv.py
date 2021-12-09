@@ -15,12 +15,14 @@ with open('VMs.csv') as csv_file:
     for row in csv_reader:
         ip=row[0];
         pseudonym = row[1];
-        userName = ""
+        round = row[2]
+        userID = ""
         doc_ref = db.collection(u'IR_VM_pseudonyms').document(ip)
         doc_ref.set({
     u'ip': ip,
     u'pseudonym': pseudonym,
-    u'userName': userName,
+    u'userID': userID,
+    u'round': round,
 
  })
 

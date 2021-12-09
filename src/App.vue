@@ -10,7 +10,7 @@
         
 
         
-          <form @submit.prevent="validateId()" v-if="!VMAssigned">
+          <form @submit.prevent="validateId()" v-if="!VMAssigned ">
             <input
               class="input input-label-long is-size-6"
               :value="'Your NDS Account: '"
@@ -20,6 +20,7 @@
                 class="input input-short is-size-6 blank-input"
                 v-model="userID"
                 :placeholder="'e.g. glr02738'"
+               
               />
             </span>
             <div class="has-text-danger" v-if="emptyInput">
@@ -28,6 +29,9 @@
              <div class="has-text-danger" v-if="userExists">
               User ID was already used. 
             </div>
+            <div class="has-text-danger" v-if="VMsTaken">
+              There are no free Cyber Range environments at the moment. Please contact one of the trainers. 
+            </div>
 
             <div class="buttons is-centered mt-5">
               <button
@@ -35,13 +39,15 @@
                 type="submit"
                 value="Submit"
                 @click="validateId()"
+                v-if="!VMsTaken"
               >
                 <span>Submit</span>
               </button>
     
             </div>
           </form>
-          <div v-else> 
+
+          <div v-else-if="VMAssigned"> 
  <div class="title mt-6 pt-6"> Hello <strong class="has-text-primary"> {{this.pseudonym}} </strong>. </div>
         
           <div class="small">(this will be your pseudonym on the cyber range)  </div>  <br> 
@@ -81,6 +87,7 @@
 import { userDashboard } from "@/firebase"; // TODO rename to userScoreboard
 import { VM_db } from "@/firebase"; 
 
+
 export default {
   name: "App",
 
@@ -94,13 +101,16 @@ export default {
       inputGiven: false,
       userExists: false,
       VMData: null,
-      VMAssigned: false
+      VMAssigned: false,
+      VMsTaken: false
  };
   },
 
   methods: {
     proceedToCR() {
         window.open(this.url); 
+        //window.open(this.url,"_self")
+    
     }, 
     validateId() {
       var message = localStorage.getItem("storedData");
@@ -113,6 +123,7 @@ export default {
         this.inputGiven = true;
         this.userExists = false;
         this.assignVM();
+    
 
       } },
       
@@ -139,27 +150,54 @@ export default {
           
       },
 
+      forward(){
+        var xhr = new XMLHttpRequest();
+              xhr.open("POST", "http://localhost:7080", true);
+              xhr.setRequestHeader('Content-Type', 'application/json');
+              xhr.send(JSON.stringify({
+              userID: this.userID
+}));
+      },
+
       async getFreeVM(){
-          const snapshot = await VM_db.where("userName", "==", "").limit(1).get();
+       
+          const snapshot = await VM_db.where("userID", "==", "").limit(1).get();
+          console.log(snapshot)
           this.VMData=snapshot.docs.map((doc) => doc.data())
+          console.log("VM Data", this.VMData[0])
+          if(typeof this.VMData[0] !== "undefined"){
           console.log(this.VMData[0].ip)
           userDashboard.doc(this.userID).set({
               round: 1,
               level: 0,
               points: 0,
               ip: this.VMData[0].ip,
-              pseudonym: this.VMData[0].pseudonym 
+              pseudonym: this.VMData[0].pseudonym,
+              userID: this.userID
               } );
               
               VM_db.doc(this.ip).update( {
-                userName : this.userID }
+                userID : this.userID }
               )
               this.pseudonym = this.VMData[0].pseudonym;
-              this.url="http://"+this.VMData[0].ip+":7080";
-              this.ip= this.VMData[0].ip
-              this.VMAssigned = true;
+              //this.url="http://"+this.VMData[0].ip+":7080?userID="+this.userID; TODO:Change back
+
               
-              } 
+
+              this.url="http://localhost:7080?userID="+this.userID;
+              this.ip= this.VMData[0].ip
+              this.VMAssigned = true; }
+
+              else{
+          
+                  this.VMsTaken = true;
+                 
+              }
+            
+        }
+
+        
+              
 
               
       },
@@ -221,7 +259,7 @@ export default {
 
     
     async getVM(){
-      const snapshot = await VM_db.where("userName", "==", "").limit(1).get();
+      const snapshot = await VM_db.where("userID", "==", "").limit(1).get();
           console.log(snapshot.docs.map((doc) => doc.data()));
           return JSON.stringify(snapshot.docs.map((doc) => doc.data().pseudonym)) //funktioniert so nicht
     },
