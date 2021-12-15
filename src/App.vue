@@ -4,10 +4,40 @@
       <!-- layout prior exercise: prompts user to login -->
       <div class="is-vhcentered has-text-centered pt-6">
         <!--p v-if="!VMAssigned" class="pt-6" style="font-size:48px;text-align:center">👋</p-->
-        <div v-if="!VMAssigned" class="is-json title mb-6">
-          Welcome 👋 to IRCR! 
-          <div class="subtitle mb-6 pb-6"> A Cyber Range for Incident Response Training. </div> </div> <br>
+          <div class="columns is-hcentered mb-5">
+            <img class="image is-hcentered" style="width: 100px"
+              src="./assets/iceberg.png"
+            /> </div>
         
+        <div v-if="!VMAssigned" class="is-json title mt-6 pt-6">
+          Welcome to ICEBERG! 
+          <div class="subtitle mb-6 pb-6"> A Cyber Range for Incident Response Training. </div> </div> 
+          
+          
+                   <div v-else> 
+ <div class="title mt-6 pt-6"> Hello <strong class="has-text-primary"> {{this.pseudonym}} </strong>. </div>
+        
+          <div class="small">(this will be your pseudonym on the cyber range)  </div>  <br> 
+          Thank you for registration. We registered your user ID <strong class="has-text-primary"> {{this.userID}} </strong> and set up the cyber range for you. 
+
+            <div class="buttons is-centered mt-5">
+              <button
+                class="button submit-button is-rounded mt-5"
+                type="submit"
+                value="Submit"
+                @click="proceedToCR()"
+              >
+                <span>PROCEED TO CYBER RANGE → </span>
+              </button>
+    
+            </div>
+
+
+          </div>
+
+          
+          <br>
+         
 
         
           <form @submit.prevent="validateId()" v-if="!VMAssigned ">
@@ -33,6 +63,7 @@
               There are no free Cyber Range environments at the moment. Please contact one of the trainers. 
             </div>
 
+              <br>
             <div class="buttons is-centered mt-5">
               <button
                 class="button submit-button is-rounded "
@@ -41,36 +72,16 @@
                 @click="validateId()"
                 v-if="!VMsTaken"
               >
-                <span>Submit</span>
+                <span>Register</span>
               </button>
     
             </div>
           </form>
 
-          <div v-else-if="VMAssigned"> 
- <div class="title mt-6 pt-6"> Hello <strong class="has-text-primary"> {{this.pseudonym}} </strong>. </div>
+ 
         
-          <div class="small">(this will be your pseudonym on the cyber range)  </div>  <br> 
-          Thank you for registration. We registered your user ID <strong class="has-text-primary"> {{this.userID}} </strong> and set up the cyber range for you. 
-
-            <div class="buttons is-centered mt-5">
-              <button
-                class="button submit-button is-rounded mt-5"
-                type="submit"
-                value="Submit"
-                @click="proceedToCR()"
-              >
-                <span>PROCEED TO CYBER RANGE → </span>
-              </button>
-    
-            </div>
-
-
-          </div>
-
-        
-        <div class="mt-6">
-        <h2 class="is-json mt-6">
+        <div class="mt-6 pt-6 ">
+        <h2 class="is-json mt-6 pt-6">
           A master's project 🎓 at the University of Regensburg.
         </h2>
         </div>
@@ -108,8 +119,7 @@ export default {
 
   methods: {
     proceedToCR() {
-        window.open(this.url); 
-        //window.open(this.url,"_self")
+        window.open(this.url,"_self")
     
     }, 
     validateId() {

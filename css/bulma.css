@@ -3772,6 +3772,11 @@ a.tag:hover {
   
 }
 
+.input {
+  display:inline;
+  float: left
+}
+
 
 .input::-moz-placeholder, .textarea::-moz-placeholder, .select select::-moz-placeholder {
   color: rgba(54, 54, 54, 0.3);
