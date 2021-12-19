@@ -189,11 +189,11 @@ export default {
               
               
               this.pseudonym = this.VMData[0].pseudonym;
-              //this.url="http://"+this.VMData[0].ip+":7080?userID="+this.userID; TODO:Change back
+              this.url="http://"+this.VMData[0].ip+":7080?userID="+this.userID; 
 
               
 
-              this.url="http://localhost:7080?userID="+this.userID;
+              //this.url="http://localhost:7080?userID="+this.userID;
               
               this.VMAssigned = true; }
 
