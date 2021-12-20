@@ -10,12 +10,12 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 
-with open('usernames.csv') as csv_file:
+with open('VM_round1.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=';')
     for row in csv_reader:
-        userID=row[0];
-        username = row[1];
+        ip=row[0];
+        pseudonym = row[1];
         round= row[2];
-        doc_ref = db.collection(u'cyberrangeDashboard').document(userID)
+        doc_ref = db.collection(u'IR_VM_pseudonyms').document(ip)
         doc_ref.delete()
 

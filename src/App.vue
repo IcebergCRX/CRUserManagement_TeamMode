@@ -42,7 +42,7 @@
         
           <form @submit.prevent="validateId()" v-if="!VMAssigned ">
             <input
-              class="input input-label-long is-size-6"
+              class="input input-label-long is-size-6 is-centered "
               :value="'Your NDS Account: '"
             />
             <span>
@@ -53,6 +53,8 @@
                
               />
             </span>
+             <br>
+              <br>
             <div class="has-text-danger" v-if="emptyInput">
               User ID cannot be empty.
             </div>
@@ -60,7 +62,7 @@
               User ID was already used. 
             </div>
             <div class="has-text-danger" v-if="VMsTaken">
-              There are no free Cyber Range environments at the moment. Please contact one of the trainers. 
+              No free Cyber Range environments at the moment.  <br> Please contact one of the trainers. 
             </div>
 
               <br>
@@ -179,7 +181,7 @@ export default {
               )
 
           userDashboard.doc(this.userID).set({
-              round: 1,
+              round: this.VMData[0].round,
               level: 0,
               points: 0,
               ip: this.VMData[0].ip,
