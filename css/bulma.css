@@ -708,7 +708,7 @@ margin-right: 2rem !important;
   box-shadow: none;
   display: inline-flex;
   font-size: 1rem;
-  
+  float:left;
   justify-content: flex-start;
   line-height: 1.5;
   padding-bottom: calc(0.5em - 1px);
@@ -3774,7 +3774,7 @@ a.tag:hover {
 
 .input {
   display:inline;
-  float: left
+
 }
 
 

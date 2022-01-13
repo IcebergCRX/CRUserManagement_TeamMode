@@ -3,15 +3,15 @@
     <div>
       <!-- layout prior exercise: prompts user to login -->
       <div class="is-vhcentered has-text-centered pt-6">
-        <!--p v-if="!VMAssigned" class="pt-6" style="font-size:48px;text-align:center">👋</p-->
+      
           <div class="columns is-hcentered mb-5">
             <img class="image is-hcentered" style="width: 100px"
-              src="./assets/iceberg.png"
+              src="./assets/rocket.svg"
             /> </div>
         
-        <div v-if="!VMAssigned" class="is-json title mt-6 pt-6">
-          Welcome to ICEBERG! 
-          <div class="subtitle mb-6 pb-6"> A Cyber Range for Incident Response Training. </div> </div> 
+        <div v-if="!VMAssigned" class="is-json title ">
+          Welcome to SOCCyberRange! 
+          <div class="subtitle mb-6 pb-6"> A Cyber Range for SOC Analysts. </div> </div> 
           
           
                    <div v-else> 
@@ -80,13 +80,6 @@
             </div>
           </form>
 
- 
-        
-        <div class="mt-6 pt-6 ">
-        <h2 class="is-json mt-6 pt-6">
-          A master's project 🎓 at the University of Regensburg.
-        </h2>
-        </div>
       </div>
 
         </div>
