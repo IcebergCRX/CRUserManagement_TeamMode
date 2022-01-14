@@ -9,18 +9,25 @@
               src="./assets/rocket.svg"
             /> </div>
         
-        <div v-if="!VMAssigned" class="is-json title ">
+        <div v-if="!VMAssigned && !checked" >
+          <div class="is-json title ">
           Welcome to SOCCyberRange! 
-          <div class="subtitle mb-6 pb-6"> A Cyber Range for SOC Analysts. </div> </div>
+          <div class="subtitle mb-6 "> A Cyber Range for SOC Analysts. </div> </div> </div>
           
           
-          <div v-if="!VMAssigned" class="subtitle mb-6">
+          <div v-if="!checked" class="subtitle mb-6 is-6 ">
                 Before registration, please take part in our
-<u><a class="title is-json is-primary-darker " href="https://quizizz.com/join?gc=07101609">
-pre-quiz</a></u>
+<strong><a class="subtitle is-4 is-json has-text-link" href="https://quizizz.com/join?gc=07101609" target="_blank"><u>
+pre-quiz</u></a></strong> , then come back to this page. 
 
-<br> Please use your <strong>NDS-account (e.g. glr02738)</strong> to register for the quiz.
+<br> Please use your <strong>NDS-account (e.g. glr02738)</strong> to register for the quiz. <br>
+
+
+<input type="checkbox" class= "subtitle is- is-json mt-6" id="checkbox" v-model="checked">
+<label class= "subtitle is-5 is-json" for="checkbox"> <strong> Quiz Completed</strong> </label>
             </div>
+
+
           
           
           
@@ -28,8 +35,8 @@ pre-quiz</a></u>
 
           
           
-                   <div v-else> 
- <div class="title mt-6 pt-6"> Hello <strong class="has-text-primary"> {{this.pseudonym}} </strong>. </div>
+                   <div v-if="checked && VMAssigned"> 
+ <div class="title pt-6"> Hello <strong class="has-text-primary"> {{this.pseudonym}} </strong>. </div>
         
           <div class="small">(this will be your pseudonym on the cyber range)  </div>  <br> 
           Thank you for registration. We registered your user ID <strong class="has-text-primary"> {{this.userID}} </strong> and set up the cyber range for you. 
@@ -54,11 +61,14 @@ pre-quiz</a></u>
          
          <div stlye="width=100%">
          
+           <div v-if="checked && !VMAssigned" class="subtitle is-5 mb-6">
 
+          Thank you for taing part in the pre-quiz! <br>Now you can <strong>register</strong> for the cyber range
+              <br>    <br> <br> 
         
           <form @submit.prevent="validateId()" v-if="!VMAssigned ">
 
-            <div class="columns">
+            <div class="columns is-offset-one-quarter">
             <input
               class="input input-label-long is-size-6 is-centered column"
               :value="'Your NDS Account: '"
@@ -85,7 +95,7 @@ pre-quiz</a></u>
             </div>
 
               <br>
-            <div class="buttons is-centered mt-5">
+            <div class="buttons is-centered ">
               <button
                 class="button submit-button is-rounded "
                 type="submit"
@@ -99,6 +109,8 @@ pre-quiz</a></u>
            
              </div>
           </form>
+
+           </div>
 
       </div>
 </div>
@@ -129,7 +141,8 @@ export default {
       VMData: null,
       VMAssigned: false,
       VMsTaken: false,
-      blockly: null
+      blockly: null,
+      checked: false,
  };
   },
 
