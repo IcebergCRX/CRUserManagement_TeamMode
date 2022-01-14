@@ -15,7 +15,8 @@ with open('VMs.csv') as csv_file:
     for row in csv_reader:
         ip=row[0];
         pseudonym = row[1];
-        round = row[2]
+        round = row[2];
+        blockly = row[3];
         userID = ""
         doc_ref = db.collection(u'visualPseudonyms').document(ip)
         doc_ref.set({
@@ -23,6 +24,7 @@ with open('VMs.csv') as csv_file:
     u'pseudonym': pseudonym,
     u'userID': userID,
     u'round': round,
+    u'blockly': blockly,
 
  })
 

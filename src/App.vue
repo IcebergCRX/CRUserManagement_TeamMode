@@ -11,7 +11,21 @@
         
         <div v-if="!VMAssigned" class="is-json title ">
           Welcome to SOCCyberRange! 
-          <div class="subtitle mb-6 pb-6"> A Cyber Range for SOC Analysts. </div> </div> 
+          <div class="subtitle mb-6 pb-6"> A Cyber Range for SOC Analysts. </div> </div>
+          
+          
+          <div v-if="!VMAssigned" class="subtitle mb-6">
+                Before registration, please take part in our
+<u><a class="title is-json is-primary-darker " href="https://quizizz.com/join?gc=07101609">
+pre-quiz</a></u>
+
+<br> Please use your <strong>NDS-account (e.g. glr02738)</strong> to register for the quiz.
+            </div>
+          
+          
+          
+           
+
           
           
                    <div v-else> 
@@ -38,23 +52,28 @@
           
           <br>
          
+         <div stlye="width=100%">
+         
 
         
           <form @submit.prevent="validateId()" v-if="!VMAssigned ">
+
+            <div class="columns">
             <input
-              class="input input-label-long is-size-6 is-centered "
+              class="input input-label-long is-size-6 is-centered column"
               :value="'Your NDS Account: '"
             />
             <span>
               <input
-                class="input input-short is-size-6 blank-input"
+                class="input input-short is-size-6 blank-input column"
                 v-model="userID"
                 :placeholder="'e.g. glr02738'"
                
               />
             </span>
-             <br>
-              <br>
+
+             </div>
+             
             <div class="has-text-danger" v-if="emptyInput">
               User ID cannot be empty.
             </div>
@@ -77,11 +96,12 @@
                 <span>Register</span>
               </button>
     
-            </div>
+           
+             </div>
           </form>
 
       </div>
-
+</div>
         </div>
   </body>
 </template>
@@ -108,7 +128,8 @@ export default {
       userExists: false,
       VMData: null,
       VMAssigned: false,
-      VMsTaken: false
+      VMsTaken: false,
+      blockly: null
  };
   },
 
@@ -166,6 +187,10 @@ export default {
           if(typeof this.VMData[0] !== "undefined"){
 
                 this.ip= this.VMData[0].ip
+                var blockBool = (this.VMData[0].blockly === 'true');
+
+                this.blockly =  blockBool
+           
                 //const check = await VM_db.doc(this.ip).get();
                 //console.log("still empty: ", check.data().userID)
 
@@ -184,9 +209,16 @@ export default {
               
               
               this.pseudonym = this.VMData[0].pseudonym;
-              this.url="http://"+this.VMData[0].ip+":7080?userID="+this.userID; 
+              if(this.blockly==true) {
+              this.url="http://"+this.VMData[0].ip+":7080?userID="+this.userID+"&blockly"; 
+              console.log(this.url)
+              }
+              else{
+                this.url="http://"+this.VMData[0].ip+":7080?userID="+this.userID; 
+                console.log(this.url)
+              }
 
-              
+     
 
               //this.url="http://localhost:7080?userID="+this.userID;
               
