@@ -16,15 +16,26 @@
           
           
           <div v-if="!checked" class="subtitle mb-6 is-6 ">
-                Before registration, please take part in our
-<strong><a class="subtitle is-4 is-json has-text-link" href="https://quizizz.com/join?gc=07101609" target="_blank"><u>
-pre-quiz</u></a></strong> , then come back to this page. 
+                Before registration, please take part in our pre-quiz
+<!--strong><a class="subtitle is-4 is-json has-text-link" href="https://quizizz.com/join?gc=07101609" target="_blank"><u>
+pre-quiz</u></a></strong--> , then come back to this page. 
 
 <br> Please use your <strong>NDS-account (e.g. glr02738)</strong> to register for the quiz. <br>
+ <div class="buttons is-centered pt-6 ">
+<button
+                class="button submit-button is-rounded "
+                type="submit"
+                value="Submit"
+                @click="proceedToQuiz(); quizStarted=true"
+                v-if="!VMsTaken"
+              >
+                <span>Start Quiz  	
+&#10140;</span>
+              </button> </div>
 
-
+<div v-if="quizStarted">
 <input type="checkbox" class= "subtitle is- is-json mt-6" id="checkbox" v-model="checked">
-<label class= "subtitle is-5 is-json" for="checkbox"> <strong> Quiz Completed</strong> </label>
+<label class= "subtitle is-5 is-json" for="checkbox" > <strong> Quiz Completed</strong> </label></div>
             </div>
 
 
@@ -143,14 +154,23 @@ export default {
       VMsTaken: false,
       blockly: null,
       checked: false,
+      quizStarted: false,
  };
   },
 
   methods: {
-    proceedToCR() {
-        window.open(this.url,"_self")
+    proceedToQuiz() {
+        window.open("https://quizizz.com/join?gc=07101609","_balnk").focus()
     
     }, 
+
+    proceedToCR() {
+        window.open(this.url,"_self")
+         
+    
+    }, 
+
+
     validateId() {
       var message = localStorage.getItem("storedData");
       console.log(message);
