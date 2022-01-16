@@ -1,148 +1,150 @@
-<template >
+<template>
   <body>
     <div>
       <!-- layout prior exercise: prompts user to login -->
       <div class="is-vhcentered has-text-centered pt-6">
-      
-          <div class="columns is-hcentered mb-5">
-            <img class="image is-hcentered" style="width: 100px"
-              src="./assets/rocket.svg"
-            /> </div>
-        
-        <div v-if="!VMAssigned && !checked" >
+        <div class="columns is-hcentered mb-5">
+          <img
+            class="image is-hcentered"
+            style="width: 100px"
+            src="./assets/rocket.svg"
+          />
+        </div>
+
+        <div v-if="!VMAssigned">
           <div class="is-json title ">
-          Welcome to SOCCyberRange! 
-          <div class="subtitle mb-6 "> A Cyber Range for SOC Analysts. </div> </div> </div>
-          
-          
-          <div v-if="!checked" class="subtitle mb-6 is-6 ">
-                Before registration, please take part in our pre-quiz
-<!--strong><a class="subtitle is-4 is-json has-text-link" href="https://quizizz.com/join?gc=07101609" target="_blank"><u>
-pre-quiz</u></a></strong--> , then come back to this page. 
+            Welcome to SOCCyberRange!
+            <div class="subtitle mb-6 ">A Cyber Range for SOC Analysts.</div>
+          </div>
+        </div>
 
-<br> Please use your <strong>NDS-account (e.g. glr02738)</strong> to register for the quiz. <br>
- <div class="buttons is-centered pt-6 ">
-<button
-                class="button submit-button is-rounded "
-                type="submit"
-                value="Submit"
-                @click="proceedToQuiz(); quizStarted=true"
-                v-if="!VMsTaken"
-              >
-                <span>Start Quiz  	
-&#10140;</span>
-              </button> </div>
+        <div v-if="!checked" class="subtitle mb-6 is-6 ">
+          Before registration, please take part in our pre-quiz
+          <!--strong><a class="subtitle is-4 is-json has-text-link" href="https://quizizz.com/join?gc=07101609" target="_blank"><u>
+pre-quiz</u></a></strong-->
+          , then come back to this page.
 
-<div v-if="quizStarted">
-<input type="checkbox" class= "subtitle is- is-json mt-6" id="checkbox" v-model="checked">
-<label class= "subtitle is-5 is-json" for="checkbox" > <strong> Quiz Completed</strong> </label></div>
-            </div>
-
-
-          
-          
-          
-           
-
-          
-          
-                   <div v-if="checked && VMAssigned"> 
- <div class="title pt-6"> Hello <strong class="has-text-primary"> {{this.pseudonym}} </strong>. </div>
-        
-          <div class="small">(this will be your pseudonym on the cyber range)  </div>  <br> 
-          Thank you for registration. We registered your user ID <strong class="has-text-primary"> {{this.userID}} </strong> and set up the cyber range for you. 
-
-            <div class="buttons is-centered mt-5">
-              <button
-                class="button submit-button is-rounded mt-5"
-                type="submit"
-                value="Submit"
-                @click="proceedToCR()"
-              >
-                <span>PROCEED TO CYBER RANGE → </span>
-              </button>
-    
-            </div>
-
-
+          <br />
+          Please use your <strong>NDS-account (e.g. glr02738)</strong> to
+          register for the quiz. <br />
+          <div class="buttons is-centered pt-6 ">
+            <button
+              class="button submit-button is-rounded "
+              type="submit"
+              value="Submit"
+              @click="
+                proceedToQuiz();
+                quizStarted = true;
+              "
+              v-if="!VMsTaken"
+            >
+              <span>Start Quiz &#10140;</span>
+            </button>
           </div>
 
-          
-          <br>
-         
-         <div stlye="width=100%">
-         
-           <div v-if="checked && !VMAssigned" class="subtitle is-5 mb-6">
-
-          Thank you for taing part in the pre-quiz! <br>Now you can <strong>register</strong> for the cyber range
-              <br>    <br> <br> 
-        
-          <form @submit.prevent="validateId()" v-if="!VMAssigned ">
-
-            <div class="columns is-offset-one-quarter">
+          <div v-if="quizStarted">
             <input
-              class="input input-label-long is-size-6 is-centered column"
-              :value="'Your NDS Account: '"
+              type="checkbox"
+              class="subtitle is- is-json mt-6"
+              id="checkbox"
+              v-model="checked"
             />
-            <span>
-              <input
-                class="input input-short is-size-6 blank-input column"
-                v-model="userID"
-                :placeholder="'e.g. glr02738'"
-               
-              />
-            </span>
-
-             </div>
-             
-            <div class="has-text-danger" v-if="emptyInput">
-              User ID cannot be empty.
-            </div>
-             <div class="has-text-danger" v-if="userExists">
-              User ID was already used. 
-            </div>
-            <div class="has-text-danger" v-if="VMsTaken">
-              No free Cyber Range environments at the moment.  <br> Please contact one of the trainers. 
-            </div>
-
-              <br>
-            <div class="buttons is-centered ">
-              <button
-                class="button submit-button is-rounded "
-                type="submit"
-                value="Submit"
-                @click="validateId()"
-                v-if="!VMsTaken"
-              >
-                <span>Register</span>
-              </button>
-    
-           
-             </div>
-          </form>
-
-           </div>
-
-      </div>
-</div>
+            <label class="subtitle is-5 is-json" for="checkbox">
+              <strong> Quiz Completed</strong>
+            </label>
+          </div>
         </div>
+
+        <div v-if="checked && VMAssigned">
+          <div class="title pt-6">
+            Hello
+            <strong class="has-text-primary"> {{ this.pseudonym }} </strong>.
+          </div>
+
+          <div class="small">
+            (this will be your pseudonym on the cyber range)
+          </div>
+          <br />
+          Thank you for registration. We registered your user ID
+          <strong class="has-text-primary"> {{ this.userID }} </strong> and set
+          up the cyber range for you.
+
+          <div class="buttons is-centered mt-5">
+            <button
+              class="button submit-button is-rounded mt-5"
+              type="submit"
+              value="Submit"
+              @click="proceedToCR()"
+            >
+              <span>PROCEED TO CYBER RANGE → </span>
+            </button>
+          </div>
+        </div>
+
+        <br />
+
+        <div stlye="width=100%">
+          <div v-if="checked && !VMAssigned" class="subtitle is-5 mb-6">
+            Thank you for taing part in the pre-quiz! <br />Now you can
+            <strong>register</strong> for the cyber range <br />
+            <br />
+            <br />
+
+            <form @submit.prevent="validateId()" v-if="!VMAssigned">
+              <div class="columns is-offset-one-quarter">
+                <input
+                  class="input input-label-long is-size-6 is-centered column"
+                  :value="'Your NDS Account: '"
+                />
+                <span>
+                  <input
+                    class="input input-short is-size-6 blank-input column"
+                    v-model="userID"
+                    :placeholder="'e.g. glr02738'"
+                  />
+                </span>
+              </div>
+
+              <div class="has-text-danger" v-if="emptyInput">
+                User ID cannot be empty.
+              </div>
+              <div class="has-text-danger" v-if="userExists">
+                User ID was already used.
+              </div>
+              <div class="has-text-danger" v-if="VMsTaken">
+                No free Cyber Range environments at the moment. <br />
+                Please contact one of the trainers.
+              </div>
+
+              <br />
+              <div class="buttons is-centered ">
+                <button
+                  class="button submit-button is-rounded "
+                  type="submit"
+                  value="Submit"
+                  @click="validateId()"
+                  v-if="!VMsTaken"
+                >
+                  <span>Register</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </template>
 
-
 <script>
-
-
 import { userDashboard } from "@/firebase"; // TODO rename to userScoreboard
-import { VM_db } from "@/firebase"; 
-
+import { VM_db } from "@/firebase";
 
 export default {
   name: "App",
 
   data() {
     return {
-      
       gameCompleted: false,
       gameStarted: false,
       userID: null,
@@ -155,21 +157,17 @@ export default {
       blockly: null,
       checked: false,
       quizStarted: false,
- };
+    };
   },
 
   methods: {
     proceedToQuiz() {
-        window.open("https://quizizz.com/join?gc=07101609","_balnk").focus()
-    
-    }, 
+      window.open("https://quizizz.com/join?gc=07101609", "_balnk").focus();
+    },
 
     proceedToCR() {
-        window.open(this.url,"_self")
-         
-    
-    }, 
-
+      window.open(this.url, "_self");
+    },
 
     validateId() {
       var message = localStorage.getItem("storedData");
@@ -182,96 +180,80 @@ export default {
         this.inputGiven = true;
         this.userExists = false;
         this.assignVM();
-    
+      }
+    },
 
-      } },
-      
+    //randomly retrieve combination of yet unassigned VM/pseudonym
+    //create link for user, store userID in localStorage
 
-        //randomly retrieve combination of yet unassigned VM/pseudonym
-        //create link for user, store userID in localStorage
-      
-          assignVM() {
-        //create document in user database (cyberrangeDashboard)
-         var docRef = userDashboard.doc(String(this.userID));
-      docRef
-        .get()
-        .then((doc) => {
-          if (doc.exists) { //check if pseudonym was used before
-            this.userExists=true;
-          } 
-          
-          else{ //register user 
-            this.getFreeVM();
-        
+    assignVM() {
+      //create document in user database (cyberrangeDashboard)
+      var docRef = userDashboard.doc(String(this.userID));
+      docRef.get().then((doc) => {
+        if (doc.exists) {
+          //check if pseudonym was used before
+          this.userExists = true;
+        } else {
+          //register user
+          this.getFreeVM();
+        }
+      });
+    },
 
-          }} ); 
-        
-          
-      },
+    async getFreeVM() {
+      const snapshot = await VM_db.where("userID", "==", "")
+        .limit(1)
+        .get();
 
+      this.VMData = snapshot.docs.map((doc) => doc.data());
 
+      if (typeof this.VMData[0] !== "undefined") {
+        this.ip = this.VMData[0].ip;
+        var blockBool = this.VMData[0].blockly === "true";
 
-      async getFreeVM(){
-       
-          const snapshot = await VM_db.where("userID", "==", "").limit(1).get();
+        this.blockly = blockBool;
 
-          this.VMData=snapshot.docs.map((doc) => doc.data())
-        
-          if(typeof this.VMData[0] !== "undefined"){
+        //const check = await VM_db.doc(this.ip).get();
+        //console.log("still empty: ", check.data().userID)
 
-                this.ip= this.VMData[0].ip
-                var blockBool = (this.VMData[0].blockly === 'true');
+        VM_db.doc(this.ip).update({
+          userID: this.userID,
+        });
 
-                this.blockly =  blockBool
-           
-                //const check = await VM_db.doc(this.ip).get();
-                //console.log("still empty: ", check.data().userID)
+        userDashboard.doc(this.userID).set({
+          round: this.VMData[0].round,
+          level: 0,
+          points: 0,
+          ip: this.VMData[0].ip,
+          pseudonym: this.VMData[0].pseudonym,
+          userID: this.userID,
+        });
 
-                VM_db.doc(this.ip).update( {
-                userID : this.userID }
-              )
-
-          userDashboard.doc(this.userID).set({
-              round: this.VMData[0].round,
-              level: 0,
-              points: 0,
-              ip: this.VMData[0].ip,
-              pseudonym: this.VMData[0].pseudonym,
-              userID: this.userID
-              } );
-              
-              
-              this.pseudonym = this.VMData[0].pseudonym;
-              if(this.blockly==true) {
-              this.url="http://"+this.VMData[0].ip+":7080?userID="+this.userID+"&blockly"; 
-              console.log(this.url)
-              }
-              else{
-                this.url="http://"+this.VMData[0].ip+":7080?userID="+this.userID; 
-                console.log(this.url)
-              }
-
-     
-
-              //this.url="http://localhost:7080?userID="+this.userID;
-              
-              this.VMAssigned = true; }
-
-              else{
-          
-                  this.VMsTaken = true;
-                 
-              }
-            
+        this.pseudonym = this.VMData[0].pseudonym;
+        if (this.blockly == true) {
+          this.url =
+            "http://" +
+            this.VMData[0].ip +
+            ":7080?userID=" +
+            this.userID +
+            "&blockly";
+          console.log(this.url);
+        } else {
+          this.url =
+            "http://" + this.VMData[0].ip + ":7080?userID=" + this.userID;
+          console.log(this.url);
         }
 
-        
-              
+        //this.url="http://localhost:7080?userID="+this.userID;
 
-              
-      },
+        this.VMAssigned = true;
+      } else {
+        this.VMsTaken = true;
+      }
+    },
+  },
 
-/*
+  /*
     getUserPoints() {
       var docRef = userDashboard.doc(String(this.userID));
       docRef
@@ -325,25 +307,24 @@ export default {
         });
     },   */
 
+  async getVM() {
+    const snapshot = await VM_db.where("userID", "==", "")
+      .limit(1)
+      .get();
+    console.log(snapshot.docs.map((doc) => doc.data()));
+    return JSON.stringify(snapshot.docs.map((doc) => doc.data().pseudonym)); //funktioniert so nicht
+  },
 
-    
-    async getVM(){
-      const snapshot = await VM_db.where("userID", "==", "").limit(1).get();
-          console.log(snapshot.docs.map((doc) => doc.data()));
-          return JSON.stringify(snapshot.docs.map((doc) => doc.data().pseudonym)) //funktioniert so nicht
-    },
+  async getMarker() {
+    const snapshot = await userDashboard
+      .where("round", "==", this.round)
+      .orderBy("points", "desc")
+      .get();
+    //const snapshot = await userDashboard.orderBy("points", "desc").get();
+    this.dashboard = snapshot.docs.map((doc) => doc.data());
+  },
 
-    async getMarker() {
-      const snapshot = await userDashboard
-        .where("round", "==", this.round)
-        .orderBy("points", "desc")
-        .get();
-      //const snapshot = await userDashboard.orderBy("points", "desc").get();
-      this.dashboard = snapshot.docs.map((doc) => doc.data());
-     
-    },
-
- /*   async uploadPoints() {
+  /*   async uploadPoints() {
       await userDashboard.doc(this.userID).update({
         points: this.points,
         level: this.tasksCompleted,
@@ -359,11 +340,8 @@ export default {
     },
 
 */
-    
-
 };
 </script>
-
 
 <style>
 @import "./../css/bulma.css";
