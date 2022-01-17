@@ -162,7 +162,7 @@ export default {
 
   methods: {
     proceedToQuiz() {
-      window.open("https://quizizz.com/join?gc=CHANGE", "_balnk").focus();
+      window.open("https://quizizz.com/join?gc=03647401", "_balnk").focus();
     },
 
     proceedToCR() {
