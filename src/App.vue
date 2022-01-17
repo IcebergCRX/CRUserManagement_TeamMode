@@ -85,7 +85,7 @@ pre-quiz</u></a></strong-->
 
         <div stlye="width=100%">
           <div v-if="checked && !VMAssigned" class="subtitle is-5 mb-6">
-            Thank you for taing part in the pre-quiz! <br />Now you can
+            Thank you for taking part in the pre-quiz! <br />Now you can
             <strong>register</strong> for the cyber range <br />
             <br />
             <br />
@@ -162,7 +162,7 @@ export default {
 
   methods: {
     proceedToQuiz() {
-      window.open("https://quizizz.com/join?gc=07101609", "_balnk").focus();
+      window.open("https://quizizz.com/join?gc=CHANGE", "_balnk").focus();
     },
 
     proceedToCR() {
