@@ -227,6 +227,7 @@ export default {
           ip: this.VMData[0].ip,
           pseudonym: this.VMData[0].pseudonym,
           userID: this.userID,
+          blockly: this.blockly
         });
 
         this.pseudonym = this.VMData[0].pseudonym;
