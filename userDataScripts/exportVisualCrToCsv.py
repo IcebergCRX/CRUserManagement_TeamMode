@@ -15,7 +15,7 @@ docs = db.collection(u'visualCR').where(u'round', u'==', '1').stream()
 with open('trainee_data_blockly.csv', mode='w', newline='', encoding='utf-8') as trainee_csv:
     trainee_data_writer = csv.writer(trainee_csv, delimiter=';')
     trainee_data_writer.writerow(
-        ['userID', 'pseudonym', 'round', 'points',
+        ['userID', 'pseudonym', 'round', 'blockly', 'points',
          'level', 'startTime', 'taskTimes', 'tries', 'ip', 
          'task1_start', 'task1_end', 'task1_hints', 'task1_points', 'task1_tlx_1', 'task1_tlx_2', 'task1_tlx_3', 'task1_tlx_4',
          'task2_start', 'task2_end', 'task2_hints', 'task2_points', 'task2_tlx_1', 'task2_tlx_2', 'task2_tlx_3', 'task2_tlx_4',
@@ -27,7 +27,7 @@ with open('trainee_data_blockly.csv', mode='w', newline='', encoding='utf-8') as
     for doc in docs: 
         doc = doc.to_dict()
         trainee_data_writer.writerow([
-            doc.get('userID'), doc.get('pseudonym'), doc.get('round'),doc.get('points'), 
+            doc.get('userID'), doc.get('pseudonym'), doc.get('round'), doc.get('blockly'), doc.get('points'), 
             doc.get('level'), doc.get('startTime'), doc.get('taskTimes'), doc.get('tries'), doc.get('ip'),
             doc.get('task1_start'), doc.get('task1_end'), doc.get('task1_hints'), doc.get('task1_points'), 
             doc.get('task1_tlx')[0] if doc.get('task1_tlx') else '', doc.get('task1_tlx')[1] if doc.get('task1_tlx') else '', doc.get('task1_tlx')[2] if doc.get('task1_tlx') else '', doc.get('task1_tlx')[3] if doc.get('task1_tlx') else '',
