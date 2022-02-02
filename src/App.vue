@@ -2,7 +2,7 @@
   <body>
     <div>
       <!-- layout prior exercise: prompts user to login -->
-      <div class="is-vhcentered has-text-centered pt-6">
+      <div class="is-vhcentered has-text-centered pt-6" style="height: 100%">
         <div class="columns is-hcentered mb-5">
           <img
             class="image is-hcentered"
@@ -27,13 +27,16 @@ pre-quiz</u></a></strong-->
           <br />
           Please use your <strong>NDS-account (e.g. glr02738)</strong> to
           register for the quiz. <br />
-          <div class="buttons is-centered pt-6 ">
+
+         
+
+          <div class="buttons is-centered pt-6 " v-if="!quizStarted">
             <button
               class="button submit-button is-rounded "
               type="submit"
               value="Submit"
               @click="
-                proceedToQuiz();
+                //proceedToQuiz();
                 quizStarted = true;
               "
               v-if="!VMsTaken"
@@ -42,6 +45,12 @@ pre-quiz</u></a></strong-->
             </button>
           </div>
 
+          <iframe v-if="quizStarted"
+                src="https://quizizz.com/join?gc=15953433"
+                style="display: block; width: 100%; height: 50vh"
+                class="pt-6"
+              ></iframe>
+
           <div v-if="quizStarted">
             <input
               type="checkbox"
@@ -49,10 +58,12 @@ pre-quiz</u></a></strong-->
               id="checkbox"
               v-model="checked"
             />
-            <label class="subtitle is-5 is-json" for="checkbox">
+            <label class="subtitle is-3 is-json" for="checkbox">
               <strong> Quiz Completed</strong>
             </label>
           </div>
+               
+
         </div>
 
         <div v-if="checked && VMAssigned">
@@ -132,6 +143,7 @@ pre-quiz</u></a></strong-->
           </div>
         </div>
       </div>
+
     </div>
   </body>
 </template>
