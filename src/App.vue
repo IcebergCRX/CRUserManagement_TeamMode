@@ -14,6 +14,7 @@
         </div>
       </div>
 
+      <div v-if=quizActivated>
       <div v-if="!checked" class="subtitle mb-6 is-6">
         Before registration, please take part in our pre-quiz
         <!--strong><a class="subtitle is-4 is-json has-text-link" href="https://quizizz.com/join?gc=07101609" target="_blank"><u>
@@ -67,6 +68,7 @@
           </button>
         </div>
       </div>
+      </div>
 
       <div v-if="checked && VMAssigned">
         <div class="title pt-6">
@@ -97,12 +99,22 @@
 
       <div stlye="width=100%">
         <div v-if="checked && !VMAssigned" class="subtitle is-5 mb-6">
+          <div v-if="quizActivated">
           Thank you for taking part in the pre-quiz!
           <br />Now you can
           <strong>register</strong> for the cyber range
           <br />
           <br />
+          <br /> </div>
+
+          <div v-else>
+          Please 
+          <strong>register</strong> for the cyber range
           <br />
+          <br />
+          <br /> </div>
+
+
 
           <form @submit.prevent="validateId()" v-if="!VMAssigned">
             <div class="columns is-offset-one-quarter">
@@ -167,7 +179,8 @@ export default {
       VMAssigned: false,
       VMsTaken: false,
       blockly: null,
-      checked: false,
+      quizActivated: false,
+      checked: true, // TODO if quiz activated
       quizStarted: false,
       scenarioName: settings.scenarioName,
       urlPreQuiz: settings.urlPreQuiz,
@@ -200,7 +213,7 @@ export default {
 
     assignVM() {
       //create document in user database (cyberrangeDashboard)
-      var docRef = userDashboard.doc(String(this.userID));
+      var docRef = userDashboard.doc(String(this.userID)); 
       docRef.get().then((doc) => {
         if (doc.exists) {
           //check if pseudonym was used before
@@ -226,7 +239,7 @@ export default {
         //const check = await VM_db.doc(this.ip).get();
         //console.log("still empty: ", check.data().userID)
 
-        VM_db.doc(this.ip).update({
+        VM_db.doc(this.ip+this.pseudonym).update({
           userID: this.userID,
         });
 
