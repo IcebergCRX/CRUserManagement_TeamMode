@@ -16,15 +16,13 @@ with open('VMs.csv') as csv_file:
         ip=row[0];
         pseudonym = row[1];
         round = row[2];
-        blockly = row[3];
         userID = ""
-        doc_ref = db.collection(u'visualPseudonyms').document(ip)
+        doc_ref = db.collection(u'IR_VM_pseudonyms').document(ip+pseudonym)
         doc_ref.set({
     u'ip': ip,
     u'pseudonym': pseudonym,
     u'userID': userID,
-    u'round': round,
-    u'blockly': blockly,
+    u'round': round
 
  })
 
