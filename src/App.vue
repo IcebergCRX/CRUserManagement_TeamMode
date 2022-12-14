@@ -57,7 +57,7 @@
                 @click="validateId()"
                 v-if="!VMsTaken"
               >
-                <span>Register/Login</span>
+                <span>Login</span>
               </button>
             </div>
           </form>
