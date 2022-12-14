@@ -183,15 +183,14 @@
       </div>
 
       <div v-if="quizActivated && quizStarted && !quizCompleted ">
-        <div v-if="!quizCompleted" class="subtitle mb-6 is-6">
-          Before starting with the cyber range training, please take part in our pre-quiz
-          <!--strong><a class="subtitle is-4 is-json has-text-link" href="https://quizizz.com/join?gc=07101609" target="_blank"><u>
-          pre-quiz</u></a></strong-->
-          , then come back to this page.
-          <br />Please use your
-          <strong class="is-size-10">{{naming}} ({{namingPlaceholder}})</strong> to
-          register for the quiz.
-          <br />
+        <div v-if="!quizCompleted" class="mb-6">
+          <div class="subtitle">
+            Before starting with the cyber range training, please take part in our pre-quiz.
+            <br />Please use your
+            <strong class="title">{{naming}} ({{namingPlaceholder}})</strong>
+            to
+            register for the quiz.
+          </div>
 
           <div class="buttons is-centered pt-6" v-if="!quizStarted && showTraining">
             <button
@@ -223,6 +222,7 @@
             marginheight="0"
             marginwidth="0"
           >Wird geladen…</iframe-->
+
           <div v-if="quizStarted" class="mt-5">
             Nothing to see? Click
             <strong>
@@ -231,6 +231,16 @@
               </a>
             </strong> and come back to this page when you have finished.
           </div>
+
+          <br />
+
+          <div class="is-4">
+            <strong>Disclaimer:</strong>
+            By answering the evaluation questions, you agree that your data will be used
+            <strong>anonymized</strong> for research purposes at the University of Regensburg.
+            It is guaranteed that all data will be anonymized and securely stored in accordance with the European General Data Protection Regulation (DSGVO/GDPR) and that only those responsible for the research will have access to the data. All data will be used exclusively for research purposes and will not be passed on to third parties. You can withdraw your consent at any time.
+          </div>
+          <br />
 
           <div class="buttons is-centered pt-6" v-if="quizStarted">
             <button

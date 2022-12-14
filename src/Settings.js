@@ -1,6 +1,6 @@
 const settings = {
 
-    urlPreQuiz: "https://quizizz.com/join?gc=57183147",
+    urlPreQuiz: "https://quizizz.com/join?gc=01197995",
     scenarioName: "ICEBERG",
     naming: "NDS account",
     namingPlaceholder: "e.g. glm02369",
