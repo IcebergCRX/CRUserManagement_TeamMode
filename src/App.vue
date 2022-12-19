@@ -398,6 +398,7 @@ export default {
       groupMemberTwo: null,
       groupMemberThree: null,
       round: null,
+      points: null,
       emptyInput: false,
       emptyGroupMembers: false,
       groupMembersRegistered: false,
