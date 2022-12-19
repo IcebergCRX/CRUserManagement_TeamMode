@@ -236,7 +236,7 @@
 
           <div class="is-4">
             <strong>Disclaimer:</strong>
-            By answering the evaluation questions, you agree that your data will be used
+            By answering the evaluation questions, you agree that your data may be used
             <strong>anonymized</strong> for research purposes at the University of Regensburg.
             It is guaranteed that all data will be anonymized and securely stored in accordance with the European General Data Protection Regulation (DSGVO/GDPR) and that only those responsible for the research will have access to the data. All data will be used exclusively for research purposes and will not be passed on to third parties. You can withdraw your consent at any time.
           </div>
