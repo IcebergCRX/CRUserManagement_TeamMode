@@ -580,6 +580,7 @@ export default {
               this.level = 0;
               this.startTime = new Date();
               this.userPseudonym = doc.data().pseudonym;
+              this.ip = doc.data().ip;
               userDashboard.doc(this.userID).update({
                 startTime: this.startTime,
               });
